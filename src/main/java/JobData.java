@@ -70,28 +70,21 @@ public class JobData {
         loadData();
 
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
-        //add a way to check if user input is valid,  is in the csv file or not
+        //add a way to check if user search term is valid,  is in the csv file or not
         boolean itemFound = false;
 
         for (HashMap<String, String> row : allJobs) {
 
             String itemValue = row.get(column);
-         //   if (itemValue != null && value.toLowerCase().contains() {
+
             if (itemValue != null && itemValue.toLowerCase().contains(value.toLowerCase())) {
-
-         //       if (itemValue.contains(value)) {
                     jobs.add(row);
-
                     itemFound = true;
 
                 }
-          //  }
         }
         if (!itemFound) {
-        //    System.out.println("No Results");
-            HashMap<String, String> noResults = new HashMap<>();
-            noResults.put("", "No Results 1");
-            jobs.add(noResults);
+            System.out.println("No Results");
         }
         return jobs;
     }
@@ -119,9 +112,8 @@ public class JobData {
             }
         }
         if (!validInput) {
-            HashMap<String, String> noItemFound = new HashMap<>();
-            noItemFound.put("", "No Results 2");
-            matchJobs.add(noItemFound);
+            System.out.println("No Results");
+
         }
         return matchJobs;
     }
