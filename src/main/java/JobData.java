@@ -70,16 +70,29 @@ public class JobData {
         loadData();
 
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+        //add a way to check if user input is valid,  is in the csv file or not
+        boolean itemFound = false;
 
         for (HashMap<String, String> row : allJobs) {
 
-            String aValue = row.get(column);
+            String itemValue = row.get(column);
+         //   if (itemValue != null && value.toLowerCase().contains() {
+            if (itemValue != null && itemValue.toLowerCase().contains(value.toLowerCase())) {
 
-            if (aValue.contains(value)) {
-                jobs.add(row);
-            }
+         //       if (itemValue.contains(value)) {
+                    jobs.add(row);
+
+                    itemFound = true;
+
+                }
+          //  }
         }
-
+        if (!itemFound) {
+        //    System.out.println("No Results");
+            HashMap<String, String> noResults = new HashMap<>();
+            noResults.put("", "No Results 1");
+            jobs.add(noResults);
+        }
         return jobs;
     }
 
@@ -90,12 +103,27 @@ public class JobData {
      * @return      List of all jobs with at least one field containing the value
      */
     public static ArrayList<HashMap<String, String>> findByValue(String value) {
-
         // load data, if not already loaded
         loadData();
 
-        // TODO - implement this method
-        return null;
+        ArrayList<HashMap<String, String>> matchJobs = new ArrayList<>();
+        boolean validInput = false;
+
+        for (HashMap<String, String> row: allJobs) {
+            for (String fieldValue : row.values()) {
+                if (fieldValue != null && fieldValue.toLowerCase().contains(value.toLowerCase())) {
+                    matchJobs.add(row);
+                    validInput = true;
+                    break;
+                }
+            }
+        }
+        if (!validInput) {
+            HashMap<String, String> noItemFound = new HashMap<>();
+            noItemFound.put("", "No Results 2");
+            matchJobs.add(noItemFound);
+        }
+        return matchJobs;
     }
 
     /**
