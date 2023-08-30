@@ -84,7 +84,7 @@ public class JobData {
                 }
         }
         if (!itemFound) {
-            System.out.println("No Results");
+            System.out.print("No Results");
         }
         return jobs;
     }
@@ -112,8 +112,7 @@ public class JobData {
             }
         }
         if (!validInput) {
-            System.out.println("No Results");
-
+            System.out.print("No Results");
         }
         return matchJobs;
     }
